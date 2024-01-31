@@ -1,0 +1,11 @@
+apiVersion: 'v1'
+kind: 'Namespace'
+metadata:
+  name: "{{ .Values.namespace.name }}"
+  labels:
+    name: "{{ .Values.namespace.name }}"
+    istio-injection: "{{ .Values.namespace.istio | default "enabled" }}"
+    wcq/pod-image-whitelist: "{{ .Values.namespace.wcqPodImageWhitelist | default "enabled" }}"
+    {{- if eq .Values.namespace.opa.enabled true }}
+    opa-istio-injection: "enabled"
+    {{- end }}
